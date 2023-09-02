@@ -1,13 +1,35 @@
 import React, { useState } from 'react';
+import axios from 'axios'; // Import Axios for making API requests
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 
 function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Initialize useNavigate
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // TODO: Implement registration logic here
-        console.log('Registered with:', email, password);
+
+        try {
+            // Send a POST request to your registration API endpoint
+            const response = await axios.post('http://localhost:5000/auth/register', {
+                email,
+                password,
+            });
+
+            // Check if registration was successful
+            if (response.status === 201) {
+                console.log('User registered successfully');
+                // Redirect to the login page upon successful registration
+                navigate('/login');
+            } else {
+                console.error('Registration failed');
+                // Handle the case where registration failed
+            }
+        } catch (error) {
+            console.error('Registration failed:', error.message);
+            // Handle any errors that occurred during registration
+        }
     };
 
     return (
@@ -20,6 +42,7 @@ function Register() {
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required // Add validation as needed
                     />
                 </div>
                 <div className="form-group">
@@ -28,6 +51,7 @@ function Register() {
                         type="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        required // Add validation as needed
                     />
                 </div>
                 <button type="submit">Register</button>

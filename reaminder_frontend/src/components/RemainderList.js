@@ -20,5 +20,4 @@ function ReminderList({ reminders }) {
         </div>
     );
 }
-
 export default ReminderList;
