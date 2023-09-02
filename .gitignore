@@ -1,2 +1,3 @@
 node_modules
-./reaminder-frontend
+./reaminder-frontend/node_modules
+./env
