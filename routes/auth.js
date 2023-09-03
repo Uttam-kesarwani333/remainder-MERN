@@ -87,7 +87,8 @@ router.post('/login', async (req, res) => {
 // });
 
 
-// Create a new reminder
+
+// Define the route to create a reminder
 router.post('/reminders', async (req, res) => {
     try {
         const { date, subject, description, email, contactNo, smsNo, recur, user } = req.body;
@@ -99,7 +100,6 @@ router.post('/reminders', async (req, res) => {
         res.status(500).json({ message: 'Failed to create a reminder' });
     }
 });
-
 // Backend Route to Modify a Reminder
 router.put('/reminders/:id', async (req, res) => {
     try {
