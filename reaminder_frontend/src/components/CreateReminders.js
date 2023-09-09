@@ -5,6 +5,7 @@ import './CreateReminder.css'; // Import your CSS file
 
 function CreateReminder() {
     const [date, setDate] = useState('');
+    const [time, setTime] = useState(''); // Add state for time
     const [subject, setSubject] = useState('');
     const [description, setDescription] = useState('');
     const [email, setEmail] = useState('');
@@ -17,33 +18,38 @@ function CreateReminder() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        // console.log(date, time);
         try {
             // Check if required fields are filled
-            if (!date || !subject || !email || !user) {
+            if (!date || !time || !subject || !email) {
                 console.error('Please fill in all required fields.');
                 return;
             }
 
+            // Combine date and time into a single datetime string in ISO format
+            const dateTime = new Date(`${date}T${time}:00`).toISOString();
+            // console.log(dateTime);
+
             // Send a POST request to your backend endpoint for creating a reminder
             const response = await axios.post('http://localhost:5000/reminders/create', {
-                date,
+                date: dateTime, // Use the combined datetime
                 subject,
                 description,
                 email,
                 contactNo,
                 smsNo,
                 recur,
-                user,
+                userId: user, // Updated the field name to 'userId'
             });
 
             // Check if reminder creation was successful
             if (response.status === 201) {
                 console.log('Reminder created successfully');
                 // Redirect to a different route after successful creation
-                navigate('/dashboard');
+                navigate('/reminders/view');
                 // Clear the form fields
                 setDate('');
+                setTime('');
                 setSubject('');
                 setDescription('');
                 setEmail('');
@@ -52,7 +58,7 @@ function CreateReminder() {
                 setRecur([]);
                 setUser('');
             } else {
-                console.error('Reminder creation failedssss');
+                console.error('Reminder creation failed');
                 // Handle the case where reminder creation failed
             }
         } catch (error) {
@@ -71,6 +77,16 @@ function CreateReminder() {
                         type="date"
                         value={date}
                         onChange={(e) => setDate(e.target.value)}
+                        required
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label>Time:</label>
+                    <input
+                        type="time"
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
                         required
                     />
                 </div>
@@ -152,7 +168,4 @@ function CreateReminder() {
     );
 }
 
-export default CreateReminder;
-
-
-// end?
+export default CreateReminder

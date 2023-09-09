@@ -1,4 +1,5 @@
 /* CreateReminder.css */
+
 .create-reminder-container {
     max-width: 400px;
     margin: 0 auto;
@@ -6,11 +7,15 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f7f7f7;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    /* Add a subtle shadow */
 }
 
 .create-reminder-container h2 {
     text-align: center;
     margin-bottom: 20px;
+    color: #ff0000;
+    /* Heading color */
 }
 
 .create-reminder-container .form-group {
@@ -19,9 +24,13 @@
 
 .create-reminder-container label {
     font-weight: bold;
+    color: #555;
+    /* Label color */
 }
 
 .create-reminder-container input[type="date"],
+.create-reminder-container input[type="time"],
+/* Added styling for time input */
 .create-reminder-container input[type="text"],
 .create-reminder-container input[type="email"],
 .create-reminder-container input[type="tel"],
@@ -42,8 +51,20 @@
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+    /* Add some space from the last input */
 }
 
 .create-reminder-container button[type="submit"]:hover {
     background-color: #0056b3;
+}
+
+/* Style the error message */
+.error-message {
+    color: #d63031;
+    /* Error text color */
+    font-size: 14px;
+    margin-top: 5px;
 }

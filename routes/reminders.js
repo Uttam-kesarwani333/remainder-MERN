@@ -2,12 +2,15 @@ const express = require('express');
 const router = express.Router();
 const Reminder = require('../models/Remainder');
 
+
 // Create a new reminder
 router.post('/create', async (req, res) => {
     try {
-        const { date, subject, description, email, contactNo, smsNo, recur, userId } = req.body;
+        const { date, time, subject, description, email, contactNo, smsNo, recur, userId } = req.body;
+
         const reminder = new Reminder({
-            date,
+            date: new Date(date), // Use the "date" field directly
+            time, // Use the "time" field directly
             subject,
             description,
             email,
@@ -16,6 +19,7 @@ router.post('/create', async (req, res) => {
             recur,
             user: userId,
         });
+
         await reminder.save();
         res.status(201).json(reminder);
     } catch (error) {
@@ -23,16 +27,25 @@ router.post('/create', async (req, res) => {
     }
 });
 
-// Get all reminders for a user
-router.get('/user/:userId', async (req, res) => {
+
+// Get all reminders
+router.get('/view', async (req, res) => {
     try {
-        const userId = req.params.userId;
-        const reminders = await Reminder.find({ user: userId });
+        const reminders = await Reminder.find();
         res.json(reminders);
     } catch (error) {
         res.status(500).json({ message: 'Fetching reminders failed' });
     }
 });
+
+
+
+
+
+
+
+
+
 
 // Update a reminder
 router.put('/:id', async (req, res) => {

@@ -26,11 +26,10 @@ const reminderSchema = new mongoose.Schema({
         type: [String],
         enum: ['7 Days', '5 Days', '3 Days', '2 Days'],
     },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true,
-    },
+    // user: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'User',
+    // },
 });
 
 const Reminder = mongoose.model('Reminder', reminderSchema);
