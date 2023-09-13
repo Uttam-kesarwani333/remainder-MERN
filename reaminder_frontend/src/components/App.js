@@ -5,10 +5,10 @@ import Register from './Register';
 import DashboardButtons from './DashboardButtons';
 import CreateReminders from './CreateReminders';
 import ModifyReminders from './ModifyReminders';
-import DeleteReminders from './DeleteReminders';
 import ViewReminders from './ViewReminders';
 import './App.css'; // Import your component-based CSS here
 import LandingPage from './LandingPage';
+
 
 function App() {
     return (
@@ -34,8 +34,7 @@ function App() {
                     <Route path="/dashboard" element={<DashboardButtons />} />
                     <Route path="/reminders/create" element={<CreateReminders />} />
                     <Route path="/reminders/view" element={<ViewReminders />} />
-                    <Route path="/modify-reminder" element={<ModifyReminders />} />
-                    <Route path="/delete-reminder" element={<DeleteReminders />} />
+                    <Route path="/reminders/edit/:id" element={<ModifyReminders />} />
 
                     {/* Add more routes as needed */}
                 </Routes>

@@ -26,10 +26,10 @@ const reminderSchema = new mongoose.Schema({
         type: [String],
         enum: ['7 Days', '5 Days', '3 Days', '2 Days'],
     },
-    // user: {
-    //     type: mongoose.Schema.Types.ObjectId,
-    //     ref: 'User',
-    // },
+    isReminded: {
+        type: Boolean,  // Add this field to track if the reminder has been reminded
+        default: false, // Default value is false, indicating it hasn't been reminded
+    },
 });
 
 const Reminder = mongoose.model('Reminder', reminderSchema);

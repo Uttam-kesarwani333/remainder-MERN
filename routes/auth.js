@@ -21,7 +21,7 @@ router.post('/register', async (req, res) => {
         const user = new User({ email, password });
         await user.save();
 
-        return res.status(200).json({
+        return res.status(201).json({
             success: true,
             message: "User Created Successfully",
             data: user
@@ -35,7 +35,6 @@ router.post('/register', async (req, res) => {
         })
     }
 });
-
 
 // User login
 router.post('/login', async (req, res) => {
@@ -56,15 +55,16 @@ router.post('/login', async (req, res) => {
             expiresIn: '2h',
         });
 
-        // // Remove the password field from the user object before sending it in the response
+        // Remove the password field from the user object before sending it in the response
         user.password = undefined;
 
-        res.json({ message: 'Logged in successfully', token });
+        res.status(200).json({ message: 'Logged in successfully', token });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Login failed' });
     }
 });
+
 
 
 // // Add a logout route

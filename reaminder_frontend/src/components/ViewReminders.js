@@ -30,6 +30,10 @@ function ViewReminder() {
     return (
         <div>
             <h2>View Reminders</h2>
+            <Link to="/reminders/create">
+                <button>Create Reminder</button>
+            </Link>
+
             <ul>
                 {reminders.map((reminder) => (
                     <li key={reminder._id}>
@@ -45,7 +49,8 @@ function ViewReminder() {
                         <button onClick={() => handleDelete(reminder._id)}>DELETE</button>
 
                         {/* EDIT button - Link to an edit page (replace '/edit' with your actual edit route) */}
-                        <Link to={`/edit/${reminder._id}`}>EDIT</Link>
+                        <Link to={`/reminders/edit/${reminder._id}`}>EDIT</Link>
+
 
                         <hr />
                     </li>
