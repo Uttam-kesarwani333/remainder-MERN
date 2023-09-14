@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 
 function ModifyReminders() {
     const { id } = useParams();
@@ -157,6 +157,9 @@ function ModifyReminders() {
                 </div>
                 <button type="submit">Update Reminder</button>
             </form>
+            <Link to="/login">
+                <button>Logout</button>
+            </Link>
         </div>
     );
 }

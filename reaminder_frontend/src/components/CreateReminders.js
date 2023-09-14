@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function CreateReminder() {
     const [date, setDate] = useState('');
@@ -156,6 +156,9 @@ function CreateReminder() {
 
                 <button type="submit">Create Reminder</button>
             </form>
+            <Link to="/login">
+                <button>Logout</button>
+            </Link>
         </div>
     );
 }

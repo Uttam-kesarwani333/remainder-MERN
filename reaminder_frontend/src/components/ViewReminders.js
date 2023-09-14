@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+// import LogoutButton from './LogoutButton'; // Adjust the import path as needed
+
 
 function ViewReminder() {
     const [reminders, setReminders] = useState([]);
@@ -47,6 +49,9 @@ function ViewReminder() {
             <h2>View Reminders</h2>
             <Link to="/reminders/create">
                 <button>Create Reminder</button>
+            </Link>
+            <Link to="/login">
+                <button>Logout</button>
             </Link>
 
             <ul>

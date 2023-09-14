@@ -66,26 +66,19 @@ router.post('/login', async (req, res) => {
 });
 
 
+// Backend Route for Logout
+router.post('/logout', (req, res) => {
+    try {
+        // Clear the user's session or token (e.g., destroy the JWT token)
+        // This can vary depending on your authentication method
 
-// // Add a logout route
-// router.post('/logout', (req, res) => {
-//     try {
-
-
-
-
-
-
-
-
-//         // Respond with a success message
-//         res.json({ message: 'Logged out successfully' });
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ message: 'Logout failed' });
-//     }
-// });
-
+        // Respond with a success message
+        res.json({ message: 'Logged out successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Logout failed' });
+    }
+});
 
 
 // Define the route to create a reminder
