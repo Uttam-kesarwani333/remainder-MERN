@@ -1,39 +1,59 @@
+/* Dashboard Buttons Container */
 .dashboard-buttons-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
-
-.dashboard-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    font-size: 18px;
-    text-transform: uppercase;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #333;
     text-align: center;
-    text-decoration: none;
-    border: 2px solid #3498db;
-    border-radius: 5px;
-    background-color: #fff;
-    color: #3498db;
-    transition: background-color 0.3s, color 0.3s, transform 0.2s, border 0.3s;
-    cursor: pointer;
 }
 
-.dashboard-button .button-content {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.dashboard-button i {
+.dashboard-buttons-container h2 {
+    margin-bottom: 20px;
     font-size: 24px;
+    font-weight: bold;
+}
+
+.dashboard-buttons-container h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* Dashboard Button Styles */
+.dashboard-button {
+    display: block;
+    text-decoration: none;
+    background-color: #007bff;
+    /* Standard blue color */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px 0;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .dashboard-button:hover {
-    background-color: #3498db;
+    background-color: #0056b3;
+    /* Darker shade of blue on hover */
     color: #fff;
-    transform: scale(1.05);
-    border: 2px solid #fff;
 }
+
+/* Button Content */
+.button-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Icon Styles */
+i.fas {
+    font-size: 24px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* You can use FontAwesome or any other icon library for icons */

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import LogoutButton from './LogoutButton'; // Adjust the import path as needed
-
+import './ViewReminder.css';
 
 function ViewReminder() {
     const [reminders, setReminders] = useState([]);
 
     useEffect(() => {
         // Fetch reminders from the backend API
-        axios.get('http://localhost:5000/reminders/view')
+        axios
+            .get('http://localhost:5000/reminders/view')
             .then((response) => {
                 setReminders(response.data);
             })
@@ -45,44 +45,39 @@ function ViewReminder() {
     };
 
     return (
-        <div>
+        <div className="view-reminder-container">
             <h2>View Reminders</h2>
-            <Link to="/reminders/create">
-                <button>Create Reminder</button>
+            <Link to="/reminders/create" className="button-link">
+                <button className="create-button">Create Reminder</button>
             </Link>
-            <Link to="/login">
-                <button>Logout</button>
+            <Link to="/login" className="button-link">
+                <button className="logout-button">Logout</button>
             </Link>
 
-            <ul>
+            <ul className="reminder-list">
                 {reminders.map((reminder) => (
-                    <li key={reminder._id}>
-                        <strong>Date:</strong> {new Date(reminder.date).toLocaleString()}<br />
-                        <strong>Subject:</strong> {reminder.subject}<br />
-                        <strong>Description:</strong> {reminder.description}<br />
-                        <strong>Email:</strong> {reminder.email}<br />
-                        <strong>Contact Number:</strong> {reminder.contactNo}<br />
-                        <strong>SMS Number:</strong> {reminder.smsNo}<br />
-                        <strong>Recurrence:</strong> {reminder.recur.join(', ')}<br />
-                        <strong>Status:</strong> {reminder.isEnabled ? 'Enabled' : 'Disabled'}<br />
+                    <li key={reminder._id} className="reminder-item">
+                        <div className="reminder-header">
+                            <strong>Date:</strong> {new Date(reminder.date).toLocaleString()}
+                        </div>
+                        <div className="reminder-content">
+                            <strong>Subject:</strong> {reminder.subject}<br />
+                            <strong>Description:</strong> {reminder.description}<br />
+                            <strong>Recurrence:</strong> {reminder.recur.join(', ')}<br />
+                            <strong>Status:</strong> {reminder.isEnabled ? 'Enabled' : 'Disabled'}
+                        </div>
 
                         {/* DELETE button */}
-                        <button onClick={() => handleDelete(reminder._id)}>DELETE</button>
+                        <button className="delete-button" onClick={() => handleDelete(reminder._id)}>
+                            DELETE
+                        </button>
 
-                        {/* EDIT button - Link to an edit page (replace '/edit' with your actual edit route) */}
-                        <Link to={`/reminders/edit/${reminder._id}`}>EDIT</Link>
+                        {/* EDIT button */}
+                        <Link to={`/reminders/edit/${reminder._id}`} className="button-link edit-button">
+                            EDIT
+                        </Link>
 
                         {/* Toggle switch for enable/disable */}
-                        <label>
-                            <input
-                                type="checkbox"
-                                checked={reminder.isEnabled}
-                                onChange={() => handleToggle(reminder._id, reminder.isEnabled)}
-                            />
-                            isEnable
-                        </label>
-
-                        <hr />
                     </li>
                 ))}
             </ul>

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import DashboardButtons from './DashboardButtons'; // Import your DashboardButtons component
+import './Login.css'; // Import the Login.css file for styling
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -27,8 +28,7 @@ function Login() {
                 setTimeout(() => {
                     navigate('/dashboard'); // Redirect to the dashboard after a successful login
                 }, 2000); // Adjust the delay as needed
-            }
-            else {
+            } else {
                 console.error('Login failed');
                 toast.error('Login failed'); // Show error toast
             }
@@ -47,24 +47,28 @@ function Login() {
             <ToastContainer />
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>Email:</label>
+                    <label htmlFor="email">Email:</label>
                     <input
                         type="email"
+                        id="email"
+                        className="email-input" // Add className for styling
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required // Add validation as needed
                     />
                 </div>
                 <div className="form-group">
-                    <label>Password:</label>
+                    <label htmlFor="password">Password:</label>
                     <input
                         type="password"
+                        id="password"
+                        className="password-input" // Add className for styling
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         required // Add validation as needed
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" className="login-button">Login</button> {/* Add className for styling */}
             </form>
         </div>
     );

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import './ModifyReminder.css'; // Import the ModifyReminder.css file
 
 function ModifyReminders() {
     const { id } = useParams();
@@ -16,7 +17,8 @@ function ModifyReminders() {
     const [isEnabled, setIsEnabled] = useState(true); // Added isEnabled state
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/reminders/edit/${id}`)
+        axios
+            .get(`http://localhost:5000/reminders/edit/${id}`)
             .then((response) => {
                 const reminderData = response.data;
                 setDate(new Date(reminderData.date).toISOString().split('T')[0]);
@@ -68,7 +70,7 @@ function ModifyReminders() {
     };
 
     return (
-        <div>
+        <div className="modify-reminder-container">
             <h2>Edit Reminder</h2>
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
@@ -135,7 +137,7 @@ function ModifyReminders() {
                     <select
                         multiple
                         value={recur}
-                        onChange={(e) => setRecur(Array.from(e.target.selectedOptions, option => option.value))}
+                        onChange={(e) => setRecur(Array.from(e.target.selectedOptions, (option) => option.value))}
                     >
                         <option value="7 Days">7 Days</option>
                         <option value="5 Days">5 Days</option>

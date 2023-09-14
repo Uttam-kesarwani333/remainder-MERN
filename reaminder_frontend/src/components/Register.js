@@ -3,71 +3,69 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import DashboardButtons from './DashboardButtons'; // Import your DashboardButtons component
+import './Register.css'; // Import the Register.css file for styling
 
-function Login() {
+function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [loggedIn, setLoggedIn] = useState(false); // State variable to track login status
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('http://localhost:5000/auth/login', {
+            const response = await axios.post('http://localhost:5000/auth/register', {
                 email,
                 password,
             });
 
-            if (response.status === 200) {
-                console.log('Logged in successfully');
-                toast.success('Login successful'); // Show success toast
-                setLoggedIn(true);
+            if (response.status === 201) {
+                console.log('User registered successfully');
+                toast.success('Registration successful');
                 setTimeout(() => {
-                    navigate('/dashboard'); // Redirect to the dashboard after a successful login
+                    navigate('/login'); // Redirect to login after a delay
                 }, 2000); // Adjust the delay as needed
-            }
-            else {
-                console.error('Login failed');
-                toast.error('Login failed'); // Show error toast
+            } else {
+                console.error('Registration failed');
+                toast.error('Registration failed');
             }
         } catch (error) {
-            console.error('Login failed:', error.message);
-            toast.error('Login failed'); // Show error toast
+            console.error('Registration failed:', error.message);
+            toast.error('Registration failed');
         }
     };
-    if (loggedIn) {
-        return <DashboardButtons />;
-    }
 
     return (
-        <div className="login-container">
-            <h2>Login</h2>
+        <div className="register-container">
+            <h2>Register</h2>
             <ToastContainer />
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
-                    <label>Email:</label>
+                    <label htmlFor="email">Email:</label>
                     <input
                         type="email"
+                        id="email"
+                        className="email-input" // Add className for styling
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        required // Add validation as needed
+                        required
                     />
                 </div>
                 <div className="form-group">
-                    <label>Password:</label>
+                    <label htmlFor="password">Password:</label>
                     <input
                         type="password"
+                        id="password"
+                        className="password-input" // Add className for styling
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        required // Add validation as needed
+                        required
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" className="register-button">Register</button> {/* Add className for styling */}
             </form>
         </div>
     );
 }
 
-export default Login;
+export default Register;

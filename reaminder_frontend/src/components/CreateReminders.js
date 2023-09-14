@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import './CreateReminder.css'; // Import the CreateReminder.css file
 
 function CreateReminder() {
     const [date, setDate] = useState('');
@@ -136,7 +137,7 @@ function CreateReminder() {
                     <select
                         multiple
                         value={recur}
-                        onChange={(e) => setRecur(Array.from(e.target.selectedOptions, option => option.value))}
+                        onChange={(e) => setRecur(Array.from(e.target.selectedOptions, (option) => option.value))}
                     >
                         <option value="7 Days">7 Days</option>
                         <option value="5 Days">5 Days</option>
@@ -151,7 +152,7 @@ function CreateReminder() {
                         type="checkbox"
                         checked={isEnabled}
                         onChange={() => setIsEnabled(!isEnabled)}
-                    />
+                    />isEnabled
                 </div>
 
                 <button type="submit">Create Reminder</button>
