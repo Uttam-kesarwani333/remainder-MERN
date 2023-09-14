@@ -30,6 +30,10 @@ const reminderSchema = new mongoose.Schema({
         type: Boolean,  // Add this field to track if the reminder has been reminded
         default: false, // Default value is false, indicating it hasn't been reminded
     },
+    isEnabled: {
+        type: Boolean,
+        default: true, // By default, reminders are enabled
+    },
 });
 
 const Reminder = mongoose.model('Reminder', reminderSchema);

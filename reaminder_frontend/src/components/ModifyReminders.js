@@ -13,6 +13,7 @@ function ModifyReminders() {
     const [contactNo, setContactNo] = useState('');
     const [smsNo, setSmsNo] = useState('');
     const [recur, setRecur] = useState([]);
+    const [isEnabled, setIsEnabled] = useState(true); // Added isEnabled state
 
     useEffect(() => {
         axios.get(`http://localhost:5000/reminders/edit/${id}`)
@@ -26,6 +27,7 @@ function ModifyReminders() {
                 setContactNo(reminderData.contactNo);
                 setSmsNo(reminderData.smsNo);
                 setRecur(reminderData.recur);
+                setIsEnabled(reminderData.isEnabled); // Set isEnabled based on the reminder data
             })
             .catch((error) => {
                 console.error('Fetching reminder failed:', error.message);
@@ -44,6 +46,7 @@ function ModifyReminders() {
                 contactNo,
                 smsNo,
                 recur,
+                isEnabled, // Include the isEnabled status in the request
             };
 
             const response = await axios.put(`http://localhost:5000/reminders/edit/${id}`, updatedReminderData);
@@ -57,6 +60,11 @@ function ModifyReminders() {
         } catch (error) {
             console.error('Reminder update failed:', error.message);
         }
+    };
+
+    // Function to toggle the isEnabled state
+    const toggleEnabled = () => {
+        setIsEnabled(!isEnabled);
     };
 
     return (
@@ -134,6 +142,18 @@ function ModifyReminders() {
                         <option value="3 Days">3 Days</option>
                         <option value="2 Days">2 Days</option>
                     </select>
+                </div>
+                {/* Toggle switch for enable/disable */}
+                <div className="form-group">
+                    <label>Enable/Disable:</label>
+                    <label>
+                        <input
+                            type="checkbox"
+                            checked={isEnabled}
+                            onChange={toggleEnabled}
+                        />
+                        Enabled
+                    </label>
                 </div>
                 <button type="submit">Update Reminder</button>
             </form>

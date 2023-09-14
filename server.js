@@ -6,6 +6,7 @@ const reminderRoutes = require('./routes/reminders');
 const twilio = require('twilio');
 const Reminder = require('./models/Remainder');
 const app = express();
+require('dotenv')
 app.use(express.json());
 app.use(cors());
 
@@ -25,9 +26,7 @@ mongoose.connect(process.env.DATABASE_URL, {
 app.use('/auth', authRoutes);
 app.use('/reminders', reminderRoutes);
 
-console.log("MMM111");
 
-var temp = 1;
 setInterval(() => {
     const now = new Date(); // Current date and time
 
@@ -42,7 +41,7 @@ setInterval(() => {
 
                     // Compare reminder date with current date
 
-                    if (reminderDate - now < 0) {
+                    if (reminder.isEnabled && (new Date(reminder.date) - now < 0)) {
                         try {
                             const remindObj = await Reminder.findByIdAndUpdate(
                                 reminder._id,
@@ -53,7 +52,7 @@ setInterval(() => {
                             const authToken = process.env.AUTH_TOKEN;
                             const client = require('twilio')(accountSid, authToken);
                             const message = await client.messages.create({
-                                body: remindObj.subject,
+                                body: `Reminder: ${remindObj.subject}\nDescription: ${remindObj.description}\nDate: ${remindObj.date}`,
                                 from: 'whatsapp:+14155238886',
                                 to: 'whatsapp:+917607771027'
                             });
@@ -70,8 +69,6 @@ setInterval(() => {
             console.error('Fetching reminders failed:', err.message);
         });
 }, 1000);
-
-console.log("MMM222");
 
 
 
