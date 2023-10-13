@@ -28,18 +28,13 @@ app.use('/reminders', reminderRoutes);
 
 
 setInterval(() => {
-    const now = new Date(); // Current date and time
-
-    Reminder.find({ isReminded: false }) // Find reminders that have not been reminded yet
+    const now = new Date();
+    Reminder.find({ isReminded: false })
         .exec()
         .then((reminderList) => {
-            // console.log('Reminder list:', reminderList);
-
             if (reminderList) {
                 reminderList.forEach(async (reminder) => { // Use async here
-                    const reminderDate = new Date(reminder.date); // Convert reminder date from string to Date object
-
-                    // Compare reminder date with current date
+                    const reminderDate = new Date(reminder.date);
 
                     if (reminder.isEnabled && (new Date(reminder.date) - now < 0)) {
                         try {
@@ -47,14 +42,13 @@ setInterval(() => {
                                 reminder._id,
                                 { isReminded: true }
                             );
-
                             const accountSid = process.env.ACCOUNT_SID;
                             const authToken = process.env.AUTH_TOKEN;
                             const client = require('twilio')(accountSid, authToken);
                             const message = await client.messages.create({
                                 body: `Reminder: ${remindObj.subject}\nDescription: ${remindObj.description}\nDate: ${remindObj.date}`,
                                 from: 'whatsapp:+14155238886',
-                                to: 'whatsapp:+917607771027'
+                                to: 'whatsapp:+919369056323'
                             });
 
                             console.log(`Message SID: ${message.sid}`);
@@ -69,6 +63,8 @@ setInterval(() => {
             console.error('Fetching reminders failed:', err.message);
         });
 }, 1000);
+
+
 
 
 
